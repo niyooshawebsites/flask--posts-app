@@ -22,10 +22,10 @@ def login():
                 return redirect(url_for("dashboard.index"))
             else:
                 error = "Invalid Credentials"
-                return render_template("login.html", error=error)
+                return render_template("login.html", form=form, error=error)
         else:
             error = "Invalid Credentials"
-            return render_template("login.html", error=error)
+            return render_template("login.html", form=form, error=error)
     else:
         return render_template("login.html", form=form)
 
