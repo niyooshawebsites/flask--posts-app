@@ -1,24 +1,34 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, session
 from passlib.hash import sha256_crypt
-
-# from app.extensions import mysql
 from app.forms.register import RegisterForm
 from app.forms.login import LoginForm
 from app.models.user import create_user, login_user
 
 auth = Blueprint("auth", __name__)
 
-@auth.route("/login", methods=['GET', 'POSTS'])
+@auth.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
-        email = form.email.data
+        username = form.username.data
         password = form.password.data
-        db_user_password = login_user(email)
-        
-        if sha256_crypt.verify(password, db_user_password):
-            pass
-    return render_template("login.html")
+        db_user_password = login_user(username)
+        if(db_user_password):
+            if sha256_crypt.verify(password, db_user_password):
+                session['logged_in'] = True
+                session['username'] = username
+                
+                flash("You are now logged in", "success")
+                return redirect(url_for("dashboard.index"))
+            else:
+                error = "Invalid Credentials"
+                return render_template("login.html", error=error)
+        else:
+            error = "Invalid Credentials"
+            return render_template("login.html", error=error)
+    else:
+        return render_template("login.html", form=form)
+
 
 
 @auth.route("/register", methods=["GET", "POST"])
