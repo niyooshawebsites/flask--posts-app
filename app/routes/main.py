@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
-
-from data import get_articles
+from app.models.post import fetch_all_posts
 
 main = Blueprint("main", __name__)
 
@@ -20,12 +19,12 @@ def contact():
     return render_template("contact.html")
 
 
-@main.route("/articles")
-def articles():
-    articles = get_articles()
-    return render_template("articles.html", articles=articles)
+@main.route("/posts")
+def posts():
+    posts = fetch_all_posts()
+    return render_template("posts.html", posts=posts)
 
 
-@main.route("/article/<int:id>")
-def article(id):
-    return render_template("article.html", id=id)
+@main.route("/post/<int:id>")
+def post(id):
+    return render_template("post.html", id=id)

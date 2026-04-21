@@ -1,4 +1,38 @@
-{% extends 'layout.html'%}
-{% block body %}
-<h1>Dashboard - {{session.username}}</h1>
-{% endblock%}
+{% extends 'layout.html' %} {% block body%}
+<h1>Dashboard</h1>
+<div class="d-flex justify-content-between align-items-center">
+  <h2>Posts</h2>
+  <a class="btn btn-sm btn-success" href="post/add">Add Post</a>
+</div>
+
+{% if posts %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Author</th>
+      <th>Created at</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  {% for post in posts %}
+  <tr>
+    <td>{{post.id}}</td>
+    <td>{{post.title}}</td>
+    <td class="w-50">{{post.content[:80]+"..."}}</td>
+    <td>{{post.author}}</td>
+    <td>{{post.created_at}}</td>
+    <td>
+      <a href="/post/edit/{{post.id}}" class="btn btn-sm btn-dark">Edit</a>
+      <a class="btn btn-sm btn-danger" href="/post/delete/{{post.id}}"
+        >Delete</a
+      >
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No Posts!</p>
+{% endif %} {%endblock %}

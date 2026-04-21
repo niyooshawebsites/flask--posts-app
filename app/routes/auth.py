@@ -6,6 +6,7 @@ from app.models.user import create_user, login_user
 
 auth = Blueprint("auth", __name__)
 
+# login
 @auth.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm(request.form)
@@ -28,9 +29,15 @@ def login():
             return render_template("login.html", form=form, error=error)
     else:
         return render_template("login.html", form=form)
+    
+# logout   
+@auth.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.clear()
+    flash('You are now logged out.', 'success')
+    return redirect(url_for("auth.login"))
 
-
-
+# register
 @auth.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm(request.form)
