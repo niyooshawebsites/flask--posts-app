@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template
-from app.models.post import fetch_all_posts
+from app.models.post import fetch_all_posts, fetch_single_post
 
 main = Blueprint("main", __name__)
-
 
 @main.route("/")
 def index():
@@ -27,4 +26,5 @@ def posts():
 
 @main.route("/post/<int:id>")
 def post(id):
-    return render_template("post.html", id=id)
+    post = fetch_single_post(id)
+    return render_template("post.html", post=post)

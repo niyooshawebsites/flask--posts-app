@@ -19,6 +19,16 @@ def fetch_all_posts():
     else:
         cur.close()
         return None
-        
+  
+def fetch_single_post(id):
+    cur = mysql.connection.cursor()
+    result = cur.execute("SELECT * FROM posts WHERE id = %s", [id])
+    if result > 0:
+        post = cur.fetchone()
+        cur.close()
+        return post
+    else:
+        cur.close()
+        return None
     
     
