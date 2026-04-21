@@ -31,4 +31,14 @@ def fetch_single_post(id):
         cur.close()
         return None
     
+def delete_single_post(id):
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT * FROM posts WHERE id = %s", [id])
+    post = cur.fetchone()
     
+    if post:
+        cur.execute("DELETE FROM posts WHERE id = %s", [id])
+        mysql.connection.commit()
+    
+    cur.close()
+    return post

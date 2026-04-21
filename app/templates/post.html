@@ -1,6 +1,5 @@
 {% extends 'layout.html' %} {% block body %}
-<h1>Post ID - {{post.id}}</h1>
-<div class="card">
+<div class="card w-75 mx-auto">
   <div class="card-header">
     <h1 class="card-title">{{post.title}}</h1>
   </div>
@@ -8,6 +7,7 @@
     <p class="card-text">{{post.content}}</p>
   </div>
   <div class="card-footer d-flex justify-content-between">
+    <span>Post ID - {{post.id}}</span>
     <span>Author: {{post.author}}</span>
     <span>Created at: {{post.created_at}}</span>
   </div>
