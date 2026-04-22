@@ -1,20 +1,17 @@
-{% extends 'layout.html' %} 
-{% block body %}
+{% extends 'layout.html' %} {% block body %}
 <div class="card p-5 m-5">
-    <div class="car-header">
-        <h1 class="card-title">Welcome to POST LAB</h1>
-    </div>
-    <div class="card-body">
-        <p class="lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
-            neque.
-        </p>
-        <p class="card-text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Totam,
-            dicta possimus. Inventore laudantium nihil enim molestiae beatae
-            similique ab libero! Commodi suscipit facere laudantium fugit
-            laborum libero. Reprehenderit, repudiandae corrupti!
-        </p>
-    </div>
+  <div class="car-header">
+    <h1 class="card-title text-primary">Welcome to POST LAB</h1>
+  </div>
+  <div class="card-body">
+    <p class="lead text-secondary">Write. Publish. Repeat.</p>
+    <p class="card-text">
+      A distraction-free writing environment built on the simplicity of Flask.
+      This application strips away the noise, allowing you to focus on what
+      matters most: your words. Designed for those who value speed and a clean
+      interface, it provides a seamless bridge from your thoughts to the screen.
+    </p>
+    <a class="btn btn-primary" href="/posts">Explore Posts</a>
+  </div>
 </div>
 {% endblock %}
