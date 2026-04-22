@@ -10,7 +10,6 @@
     <tr>
       <th>Id</th>
       <th>Title</th>
-      <th>Content</th>
       <th>Author</th>
       <th>Created at</th>
       <th>Action</th>
@@ -20,14 +19,11 @@
   <tr>
     <td>{{post.id}}</td>
     <td>{{post.title}}</td>
-    <td class="w-50">{{post.content[:80]+"..."}}</td>
     <td>{{post.author}}</td>
     <td>{{post.created_at}}</td>
     <td>
       <a href="edit/post/{{post.id}}" class="btn btn-sm btn-dark">Edit</a>
-      <a class="btn btn-sm btn-danger" href="delete/post/{{post.id}}"
-        >Delete</a
-      >
+      <a class="btn btn-sm btn-danger" href="delete/post/{{post.id}}">Delete</a>
     </td>
   </tr>
   {% endfor %}

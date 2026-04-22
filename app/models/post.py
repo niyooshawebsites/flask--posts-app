@@ -31,6 +31,23 @@ def fetch_single_post(id):
         cur.close()
         return None
     
+def edit_article(id, title, content):
+    cur = mysql.connection.cursor()
+    result = cur.execute(
+        "UPDATE posts SET title = %s, content = %s WHERE id = %s",
+        (title, content, id)
+    )
+    mysql.connection.commit()
+    
+    if result > 0:
+        post = cur.fetchone()
+        cur.close()
+        return post
+    else:
+        cur.close()
+        return None
+    
+    
 def delete_single_post(id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM posts WHERE id = %s", [id])
